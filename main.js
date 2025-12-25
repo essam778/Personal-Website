@@ -345,27 +345,28 @@ function initContactForm() {
 
 // Project modal functionality
 function initProjectModals() {
-    // Modal functions are defined globally for onclick handlers
-    window.openModal = function(projectId) {
-        const modal = document.getElementById(projectId + '-modal');
-        if (modal) {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Animate modal content
-            const content = modal.querySelector('.modal-content');
-            anime({
-                targets: content,
-                scale: [0.8, 1],
-                opacity: [0, 1],
-                duration: 300,
-                easing: 'easeOutQuad'
-            });
-        }
+    // Open modal function
+    window.openModal = function(modalId) {
+        const modal = document.getElementById(modalId + '-modal');
+        modal.style.display = 'block';  // Show the modal by changing its display to block
+        
+        // Add the 'active' class to modal
+        modal.classList.add('active');
+        
+        // Animate modal content
+        const content = modal.querySelector('.modal-content');
+        anime({
+            targets: content,
+            scale: [0.8, 1],
+            opacity: [0, 1],
+            duration: 300,
+            easing: 'easeOutQuad'
+        });
     };
     
-    window.closeModal = function(projectId) {
-        const modal = document.getElementById(projectId + '-modal');
+    // Close modal function
+    window.closeModal = function(modalId) {
+        const modal = document.getElementById(modalId + '-modal');
         if (modal) {
             const content = modal.querySelector('.modal-content');
             
@@ -376,6 +377,7 @@ function initProjectModals() {
                 duration: 200,
                 easing: 'easeInQuad',
                 complete: () => {
+                    modal.style.display = 'none';  // Set display to 'none' after animation
                     modal.classList.remove('active');
                     document.body.style.overflow = 'auto';
                 }
@@ -404,6 +406,11 @@ function initProjectModals() {
         }
     });
 }
+
+// Call this function to initialize modals when the page is loaded
+document.addEventListener('DOMContentLoaded', initProjectModals);
+
+
 
 // Utility function to check if element is in viewport
 function isElementInViewport(element) {

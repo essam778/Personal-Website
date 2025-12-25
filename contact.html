@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="description" content="Essam Hisham – Young Developer & Robotics Engineer specializing in robotics, embedded systems, and web development.">
+
+<meta name="keywords" content="Robotics Engineer, Embedded Systems, Arduino, ESP32, Web Developer, Portfolio">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Essam Hisham | Developer & Robotics Engineer">
+<meta property="og:description" content="Explore my projects in robotics, embedded systems, and software development.">
+<meta property="og:image" content="https://yourdomain.com/preview.png">
+<meta property="og:type" content="website">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Essam Hisham</title>
@@ -236,24 +246,25 @@
                         <strong>Error!</strong> Please fill in all fields correctly.
                     </div>
                     
-                    <form id="contact-form">
+                    <form id="contact-form" action="https://formspree.io/f/xrezwevn" method="POST">
+
                         <div class="form-group">
-                            <input type="text" class="form-input" id="name" placeholder=" " required>
+                            <input type="text" class="form-input" name="name" id="name"  required>
                             <label class="form-label" for="name">Your Name</label>
                         </div>
                         
                         <div class="form-group">
-                            <input type="email" class="form-input" id="email" placeholder=" " required>
+                            <input type="email" class="form-input" name="email" id="email"  required>
                             <label class="form-label" for="email">Your Email</label>
                         </div>
                         
                         <div class="form-group">
-                            <input type="text" class="form-input" id="subject" placeholder=" " required>
+                            <input type="text" class="form-input"name="subject" id="subject"  required>
                             <label class="form-label" for="subject">Subject</label>
                         </div>
                         
                         <div class="form-group">
-                            <textarea class="form-input form-textarea" id="message" placeholder=" " required></textarea>
+                            <textarea class="form-input form-textarea"name="subject" id="message"  required></textarea>
                             <label class="form-label" for="message">Your Message</label>
                         </div>
                         

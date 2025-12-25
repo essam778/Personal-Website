@@ -2,14 +2,17 @@
 // Handles animations, interactions, and dynamic content
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize essential components only
     initNavigation();
     initTypewriter();
     initSkillBars();
     initSkillFilter();
-    
-    console.log('Portfolio initialized successfully!');
+
+    initContactForm();
+    initParticleBackground();
+    initScrollAnimations();
+    initProjectFilter();
 });
+
 
 // Navigation functionality
 function initNavigation() {
@@ -260,79 +263,85 @@ function initScrollAnimations() {
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
-    
+
     const submitBtn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
     const loading = document.getElementById('loading');
     const successMessage = document.getElementById('success-message');
     const errorMessage = document.getElementById('error-message');
-    
+
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Get form data
+
         const formData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             subject: document.getElementById('subject').value,
             message: document.getElementById('message').value
         };
-        
-        // Validate form
+
         if (!validateForm(formData)) {
             showMessage(errorMessage);
             return;
         }
-        
-        // Show loading state
+
         showLoadingState();
-        
-        // Simulate form submission (replace with actual endpoint)
-        setTimeout(() => {
-            hideLoadingState();
+
+        // ✅ الكود الجديد الصح
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+          hideLoadingState();
+
+          if (response.ok) {
             showMessage(successMessage);
             form.reset();
-            
-            // In a real implementation, you would send the data to your server
-            console.log('Form submitted:', formData);
-        }, 2000);
+          } else {
+            showMessage(errorMessage);
+          }
+        })
+        .catch(error => {
+          hideLoadingState();
+          showMessage(errorMessage);
+        });
     });
-    
+
     function validateForm(data) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return data.name.trim() && 
-               data.email.trim() && 
-               emailRegex.test(data.email) && 
-               data.subject.trim() && 
+        return data.name.trim() &&
+               data.email.trim() &&
+               emailRegex.test(data.email) &&
+               data.subject.trim() &&
                data.message.trim();
     }
-    
+
     function showLoadingState() {
         btnText.style.display = 'none';
         loading.style.display = 'flex';
         submitBtn.disabled = true;
     }
-    
+
     function hideLoadingState() {
         btnText.style.display = 'block';
         loading.style.display = 'none';
         submitBtn.disabled = false;
     }
-    
+
     function showMessage(messageElement) {
-        // Hide all messages
         successMessage.style.display = 'none';
         errorMessage.style.display = 'none';
-        
-        // Show the message
+
         messageElement.style.display = 'block';
-        
-        // Auto-hide after 5 seconds
+
         setTimeout(() => {
             messageElement.style.display = 'none';
         }, 5000);
     }
 }
+
 
 // Project modal functionality
 function initProjectModals() {

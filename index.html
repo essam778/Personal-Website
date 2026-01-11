@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Essam Hisham – Young Developer & Robotics Engineer specializing in robotics, embedded systems, and web development.">
+    <meta name="description"
+        content="Essam Hisham – Young Developer & Robotics Engineer specializing in robotics, embedded systems, and web development.">
 
-<meta name="keywords" content="Robotics Engineer, Embedded Systems, Arduino, ESP32, Web Developer, Portfolio">
+    <meta name="keywords" content="Robotics Engineer, Embedded Systems, Arduino, ESP32, Web Developer, Portfolio">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Essam Hisham | Developer & Robotics Engineer">
-<meta property="og:description" content="Explore my projects in robotics, embedded systems, and software development.">
-<meta property="og:image" content="https://yourdomain.com/preview.png">
-<meta property="og:type" content="website">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Essam Hisham | Developer & Robotics Engineer">
+    <meta property="og:description"
+        content="Explore my projects in robotics, embedded systems, and software development.">
+    <meta property="og:image" content="https://yourdomain.com/preview.png">
+    <meta property="og:type" content="website">
 
     <title>Essam Hisham - Developer & Robotics Engineer</title>
     <link rel="icon" href="images/icon.png" type="image/png" crossorigin="anonymous" sizes="32x32">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="images/icon.png" as="image">
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Animation Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js" defer></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -46,7 +58,7 @@
             }
         }
     </script>
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -54,12 +66,12 @@
             color: #e6f1ff;
             overflow-x: hidden;
         }
-        
+
         .hero-bg {
             background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
             position: relative;
         }
-        
+
         .particle-canvas {
             position: absolute;
             top: 0;
@@ -68,23 +80,23 @@
             height: 100%;
             z-index: 1;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
         }
-        
+
         .glow-text {
             text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
         }
-        
+
         .skill-bar {
             height: 8px;
             background: #112240;
             border-radius: 4px;
             overflow: hidden;
         }
-        
+
         .skill-progress {
             height: 100%;
             background: linear-gradient(90deg, #64ffda, #4fd1c7);
@@ -92,32 +104,32 @@
             transform: translateX(-100%);
             transition: transform 1s ease-out;
         }
-        
+
         .card-hover {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-8px) rotateX(5deg);
             box-shadow: 0 20px 40px rgba(100, 255, 218, 0.1);
         }
-        
+
         .btn-primary {
             background: linear-gradient(45deg, #64ffda, #4fd1c7);
             color: #0a192f;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
         }
-        
+
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -128,44 +140,102 @@
             background: #64ffda;
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover::after,
         .nav-link.active::after {
             width: 100%;
         }
-        
+
         .section-reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
-        
+
         .section-reveal.revealed {
             opacity: 1;
             transform: translateY(0);
         }
-        
 
-        
+
+
         .filter-btn {
             transition: all 0.3s ease;
             border: 1px solid #64ffda;
         }
-        
+
         .filter-btn.active {
             background: #64ffda;
             color: #0a192f;
         }
-        
+
         .filter-btn:hover {
             background: rgba(100, 255, 218, 0.1);
         }
+
+        /* Structural Stability for CLS */
+        nav {
+            height: 70px;
+            background-color: rgba(10, 25, 47, 0.9);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            /* 80px */
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+            width: 100%;
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-content {
+            min-height: 400px;
+        }
+
+        h1 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        #typed-name {
+            min-height: 1.2em;
+            display: inline-block;
+        }
+
+        .max-w-6xl {
+            max-width: 1152px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-navy-dark/90 backdrop-blur-sm z-50 border-b border-navy-light">
-        <div class="max-w-6xl mx-auto px-6 py-4">
+    <nav class="backdrop-blur-sm border-b border-navy-light">
+        <div class="max-w-6xl py-4">
             <div class="flex justify-between items-center">
                 <div class="text-xl font-bold text-accent-cyan font-mono">
                     &lt;Essam Hisham/&gt;
@@ -177,14 +247,15 @@
                     <a href="projects.html" class="nav-link text-slate-light hover:text-accent-cyan">Projects</a>
                     <a href="contact.html" class="nav-link text-slate-light hover:text-accent-cyan">Contact</a>
                 </div>
-                <button class="md:hidden text-accent-cyan" id="mobile-menu-btn">
+                <button class="md:hidden text-accent-cyan" id="mobile-menu-btn" aria-label="Toggle mobile menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
         </div>
-        
+
         <!-- Mobile Menu -->
         <div class="md:hidden hidden bg-navy-light" id="mobile-menu">
             <div class="px-6 py-4 space-y-4">
@@ -198,45 +269,52 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
+    <section id="home" class="hero-bg hero-section">
         <div id="particle-container" class="particle-canvas"></div>
-        <div class="hero-content max-w-6xl mx-auto px-6 py-20">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="hero-grid">
+            <div class="grid md:grid-cols-2 gap-12 items-center" style="display: contents;">
                 <div class="space-y-8">
                     <div class="space-y-4">
-                        <h1 class="text-5xl md:text-6xl font-bold glow-text">
+                        <h1 class="text-5xl md:text-6xl font-bold glow-text min-h-[1.2em]">
                             <span id="typed-name"></span>
                         </h1>
                         <h2 class="text-2xl md:text-3xl text-accent-cyan font-mono">
                             Young Developer & Robotics Engineer
                         </h2>
                         <p class="text-lg text-slate-dark max-w-lg">
-                            Passionate about building real-world projects that combine hardware and software. 
-                            Started programming at 14, now creating innovative solutions in robotics and embedded systems.
+                            Passionate about building real-world projects that combine hardware and software.
+                            Started programming at 14, now creating innovative solutions in robotics and embedded
+                            systems.
                         </p>
                     </div>
-                    
+
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a href="projects.html" class="btn-primary px-8 py-3 rounded-lg font-semibold text-center">
                             View My Projects
                         </a>
-                        <a href="contact.html" class="border-2 border-accent-cyan text-accent-cyan px-8 py-3 rounded-lg font-semibold hover:bg-accent-cyan hover:text-navy-dark transition-all duration-300 text-center">
+                        <a href="contact.html"
+                            class="border-2 border-accent-cyan text-accent-cyan px-8 py-3 rounded-lg font-semibold hover:bg-accent-cyan hover:text-navy-dark transition-all duration-300 text-center">
                             Get In Touch
                         </a>
-                           <a href="images/Essam_Hisham_CV.pdf" download class="btn-primary px-8 py-3 rounded-lg font-semibold text-center">
-                                           Download CV
-                             </a>
+                        <a href="images/Essam_Hisham_CV.pdf" download
+                            class="btn-primary px-8 py-3 rounded-lg font-semibold text-center">
+                            Download CV
+                        </a>
                     </div>
                 </div>
-             
+
 
                 <div class="flex justify-center">
                     <div class="relative">
-                        <div class="w-80 h-80 rounded-full overflow-hidden border-4 border-accent-cyan shadow-2xl">
-                            <img src="images/icon.png" alt="Essam Hisham" class="w-full h-full object-cover">
+                        <div class="w-80 h-80 rounded-full overflow-hidden border-4 border-accent-cyan shadow-2xl"
+                            style="width: 320px; height: 320px;">
+                            <img src="images/icon.png" alt="Essam Hisham" class="w-full h-full object-cover" width="320"
+                                height="320">
                         </div>
                         <div class="absolute -top-4 -right-4 w-8 h-8 bg-accent-cyan rounded-full animate-pulse"></div>
-                        <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-accent-cyan rounded-full animate-pulse delay-1000"></div>
+                        <div
+                            class="absolute -bottom-4 -left-4 w-6 h-6 bg-accent-cyan rounded-full animate-pulse delay-1000">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -250,20 +328,26 @@
                 <h2 class="text-4xl font-bold mb-4">About Me</h2>
                 <div class="w-20 h-1 bg-accent-cyan mx-auto"></div>
             </div>
-            
+
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
                     <p class="text-lg text-slate-dark">
-                        Hi! I'm Essam Hisham, a 17-year-old developer and robotics engineer from Egypt. My journey into the world of technology began at the age of 14 when I first discovered programming, and I've been hooked ever since.
+                        Hi! I'm Essam Hisham, a 17-year-old developer and robotics engineer from Egypt. My journey into
+                        the world of technology began at the age of 14 when I first discovered programming, and I've
+                        been hooked ever since.
                     </p>
                     <p class="text-lg text-slate-dark">
-                        Currently in my senior year of high school (Grade 12), I've built a strong foundation in software development, robotics, and embedded systems. I love tackling complex problems and creating innovative solutions that bridge the gap between hardware and software.
+                        Currently in my senior year of high school (Grade 12), I've built a strong foundation in
+                        software development, robotics, and embedded systems. I love tackling complex problems and
+                        creating innovative solutions that bridge the gap between hardware and software.
                     </p>
                     <p class="text-lg text-slate-dark">
-                        My passion lies in building real-world projects that make a difference. From autonomous smart cars to AI-powered embedded systems, I'm always exploring new technologies and pushing the boundaries of what's possible.
+                        My passion lies in building real-world projects that make a difference. From autonomous smart
+                        cars to AI-powered embedded systems, I'm always exploring new technologies and pushing the
+                        boundaries of what's possible.
                     </p>
                 </div>
-                
+
                 <div class="bg-navy-light p-8 rounded-lg card-hover">
                     <h3 class="text-2xl font-bold text-accent-cyan mb-6">Quick Facts</h3>
                     <div class="space-y-4">
@@ -300,7 +384,7 @@
                 <h2 class="text-4xl font-bold mb-4">My Skills</h2>
                 <div class="w-20 h-1 bg-accent-cyan mx-auto"></div>
             </div>
-            
+
             <!-- Skills Filter -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
                 <button class="filter-btn active px-6 py-2 rounded-full text-sm font-medium" data-filter="all">
@@ -319,7 +403,7 @@
                     Tools
                 </button>
             </div>
-            
+
             <!-- Skills Grid -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="skills-grid">
                 <!-- Web Development Skills -->
@@ -333,7 +417,7 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">Semantic markup and modern HTML5 features</p>
                 </div>
-                
+
                 <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="web">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-semibold text-accent-cyan">CSS</h3>
@@ -344,7 +428,7 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">Responsive design and modern CSS techniques</p>
                 </div>
-                
+
                 <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="web">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-semibold text-accent-cyan">JavaScript</h3>
@@ -355,7 +439,7 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">ES6+ and modern JavaScript frameworks</p>
                 </div>
-                
+
                 <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="web">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-semibold text-accent-cyan">Tailwind CSS</h3>
@@ -366,7 +450,7 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">Utility-first CSS framework for rapid development</p>
                 </div>
-                
+
                 <!-- Programming Languages -->
                 <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="programming">
                     <div class="flex items-center justify-between mb-4">
@@ -378,7 +462,7 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">Systems programming and embedded development</p>
                 </div>
-                
+
                 <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="programming">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-semibold text-accent-cyan">C++</h3>
@@ -389,9 +473,9 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">Object-oriented programming and robotics</p>
                 </div>
-                
+
                 <!-- Robotics & Embedded -->
-                    <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="robotics">
+                <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="robotics">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-semibold text-accent-cyan">Arduino</h3>
                         <span class="text-sm text-slate-dark">90%</span>
@@ -412,7 +496,7 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">WiFi-enabled embedded systems and IoT projects</p>
                 </div>
-                
+
                 <!-- Tools -->
                 <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="tools">
                     <div class="flex items-center justify-between mb-4">
@@ -424,7 +508,7 @@
                     </div>
                     <p class="text-sm text-slate-dark mt-2">Version control and collaboration</p>
                 </div>
-                
+
                 <div class="skill-card bg-navy-light p-6 rounded-lg card-hover" data-category="tools">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-semibold text-accent-cyan">GitHub</h3>
@@ -450,7 +534,8 @@
                 <a href="contact.html" class="btn-primary px-8 py-3 rounded-lg font-semibold">
                     Get In Touch
                 </a>
-                <a href="mailto:essamhisham12@outlook.com" class="border-2 border-accent-cyan text-accent-cyan px-8 py-3 rounded-lg font-semibold hover:bg-accent-cyan hover:text-navy-dark transition-all duration-300">
+                <a href="mailto:essamhisham12@outlook.com"
+                    class="border-2 border-accent-cyan text-accent-cyan px-8 py-3 rounded-lg font-semibold hover:bg-accent-cyan hover:text-navy-dark transition-all duration-300">
                     Send Email
                 </a>
             </div>
@@ -471,4 +556,5 @@
 
     <script src="main.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="Essam Hisham – Young Developer & Robotics Engineer specializing in robotics, embedded systems, and web development.">
+
+<meta name="keywords" content="Robotics Engineer, Embedded Systems, Arduino, ESP32, Web Developer, Portfolio">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Essam Hisham | Developer & Robotics Engineer">
+<meta property="og:description" content="Explore my projects in robotics, embedded systems, and software development.">
+<meta property="og:image" content="https://yourdomain.com/preview.png">
+<meta property="og:type" content="website">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Essam Hisham</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy-dark': '#0a192f',
+                        'navy-light': '#112240',
+                        'slate-light': '#e6f1ff',
+                        'slate-dark': '#8892b0',
+                        'accent-cyan': '#64ffda'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: #e6f1ff;
+            overflow-x: hidden;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #64ffda, #4fd1c7);
+            color: #0a192f;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #64ffda;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+            border: 1px solid #64ffda;
+        }
+        
+        .filter-btn.active {
+            background: #64ffda;
+            color: #0a192f;
+        }
+        
+        .filter-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+        
+        .project-card {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: #112240;
+            border-radius: 12px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 20px;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #64ffda;
+            color: #0a192f;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tech-badge {
+            background: #0a192f;
+            color: #64ffda;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-navy-dark/90 backdrop-blur-sm z-50 border-b border-navy-light">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold text-accent-cyan font-mono">
+                    &lt;Essam Hisham/&gt;
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-slate-light hover:text-accent-cyan">Home</a>
+                    <a href="index.html#about" class="nav-link text-slate-light hover:text-accent-cyan">About</a>
+                    <a href="index.html#skills" class="nav-link text-slate-light hover:text-accent-cyan">Skills</a>
+                    <a href="projects.html" class="nav-link active text-accent-cyan">Projects</a>
+                    <a href="contact.html" class="nav-link text-slate-light hover:text-accent-cyan">Contact</a>
+                </div>
+                <button class="md:hidden text-accent-cyan" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-navy-light" id="mobile-menu">
+            <div class="px-6 py-4 space-y-4">
+                <a href="index.html" class="block text-slate-light hover:text-accent-cyan">Home</a>
+                <a href="index.html#about" class="block text-slate-light hover:text-accent-cyan">About</a>
+                <a href="index.html#skills" class="block text-slate-light hover:text-accent-cyan">Skills</a>
+                <a href="projects.html" class="block text-accent-cyan">Projects</a>
+                <a href="contact.html" class="block text-slate-light hover:text-accent-cyan">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-32 pb-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-6">My Projects</h1>
+            <div class="w-20 h-1 bg-accent-cyan mx-auto mb-6"></div>
+            <p class="text-xl text-slate-dark max-w-3xl mx-auto">
+                A collection of my work in robotics, embedded systems, and web development. Each project represents countless hours of learning, experimenting, and building real-world solutions.
+            </p>
+        </div>
+    </section>
+
+    <!-- Project Filters -->
+    <section class="pb-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn active px-6 py-3 rounded-full font-medium" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium" data-filter="robotics">
+                    Robotics
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium" data-filter="embedded">
+                    Embedded Systems
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium" data-filter="ai">
+                    AI & Machine Learning
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium" data-filter="web">
+                    Web Development
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="pb-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                
+                <!-- Smart Car Project -->
+                <div class="project-card bg-navy-light rounded-lg overflow-hidden card-hover" data-category="robotics embedded" data-project="smart-car">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/Smart_Car_Project.webp" alt="Smart Car Project" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-accent-cyan mb-2">Smart Car Robot</h3>
+                        <p class="text-slate-dark mb-4">An autonomous vehicle built with Arduino, featuring obstacle detection, line following, and wireless control capabilities.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge">Arduino</span>
+                            <span class="tech-badge">C++</span>
+                            <span class="tech-badge">Ultrasonic Sensors</span>
+                            <span class="tech-badge">IR Sensors</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-accent-cyan hover:underline text-sm" onclick="openModal('smart-car')">
+                                View Details
+                            </button>
+                            <a href="https://github.com/essam778" class="text-accent-cyan hover:underline text-sm">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI ESP32 Project -->
+                <div class="project-card bg-navy-light rounded-lg overflow-hidden card-hover" data-category="ai embedded" data-project="ai-esp32">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/AI_ESP32_Project.webp" alt="AI ESP32 Project" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-accent-cyan mb-2">AI-Powered ESP32</h3>
+                        <p class="text-slate-dark mb-4">ESP32 microcontroller integrated with Google's Gemini AI for intelligent data processing and real-time decision making.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge">ESP32</span>
+                            <span class="tech-badge">Gemini AI</span>
+                            <span class="tech-badge">WiFi</span>
+                            <span class="tech-badge">IoT</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-accent-cyan hover:underline text-sm" onclick="openModal('ai-esp32')">
+                                View Details
+                            </button>
+                            <a href="https://github.com/essam778/ESP32-with-Gemini-AI.git" class="text-accent-cyan hover:underline text-sm">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+              <!-- Web Courses -->
+                <div class="project-card bg-navy-light rounded-lg overflow-hidden card-hover" data-category="web" data-project="portfolio-website">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-navy-dark to-navy-light flex items-center justify-center">
+                        <div class="text-center">
+                           <div class="h-48 overflow-hidden">
+                        <img src="images/Moral.png" alt="Robotics Collection" class="w-full h-full object-cover">
+                    </div>
+                            <p class="text-accent-cyan font-mono">Courses Website</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-accent-cyan mb-2">Courses Website</h3>
+                        <p class="text-slate-dark mb-4">A modern, responsive Courses website built to Learn the Students for free and all content from Youtube but  is the best.  </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Odoo</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-accent-cyan hover:underline text-sm" onclick="openModal('Courses-website')">
+                                View Details
+                            </button>
+                            <a href="https://moral2.odoo.com" class="text-accent-cyan hover:underline text-sm">Live Demo →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Portfolio -->
+                <div class="project-card bg-navy-light rounded-lg overflow-hidden card-hover" data-category="web" data-project="portfolio-website">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-navy-dark to-navy-light flex items-center justify-center">
+                        <div class="text-center">
+                           <div class="h-48 overflow-hidden">
+                        <img src="images/Website.png" alt="Robotics Collection" class="w-full h-full object-cover">
+                    </div>
+                            <p class="text-accent-cyan font-mono">Portfolio Website</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-accent-cyan mb-2">Personal Portfolio</h3>
+                        <p class="text-slate-dark mb-4">A modern, responsive portfolio website built to showcase my projects and skills as a developer and robotics engineer.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Tailwind CSS</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-accent-cyan hover:underline text-sm" onclick="openModal('portfolio-website')">
+                                View Details
+                            </button>
+                            <a href="https://essam778.github.io/Personal-Website/" class="text-accent-cyan hover:underline text-sm">Live Demo →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IoT Weather Station -->
+                <div class="project-card bg-navy-light rounded-lg overflow-hidden card-hover" data-category="embedded ai" data-project="weather-station">
+                      <div class="h-48 overflow-hidden">
+                        <img src="images/IoT_Weather_Station.webp" alt="Robotics Collection" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-accent-cyan mb-2">Smart Weather Station</h3>
+                        <p class="text-slate-dark mb-4">IoT-based weather monitoring system with real-time data collection, cloud storage, and mobile app integration.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge">ESP32</span>
+                            <span class="tech-badge">Sensors</span>
+                            <span class="tech-badge">Cloud API</span>
+                            <span class="tech-badge">Mobile App</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-accent-cyan hover:underline text-sm" onclick="openModal('weather-station')">
+                                View Details
+                            </button>
+                            <a href="#" class="text-accent-cyan hover:underline text-sm">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Home Automation System -->
+                <div class="project-card bg-navy-light rounded-lg overflow-hidden card-hover" data-category="robotics embedded" data-project="home-automation">
+                   <div class="h-48 overflow-hidden">
+                        <img src="images/home.webp" alt="Robotics Collection" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-accent-cyan mb-2">Smart Home System</h3>
+                        <p class="text-slate-dark mb-4">Comprehensive home automation system with voice control, scheduling, and energy monitoring capabilities.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge">Arduino</span>
+                            <span class="tech-badge">WiFi</span>
+                            <span class="tech-badge">Voice Control</span>
+                            <span class="tech-badge">Sensors</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="text-accent-cyan hover:underline text-sm" onclick="openModal('home-automation')">
+                                View Details
+                            </button>
+                            <a href="#" class="text-accent-cyan hover:underline text-sm">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modals -->
+    <!-- Smart Car Modal -->
+    <div class="modal" id="smart-car-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('smart-car')">&times;</button>
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-accent-cyan mb-6">Smart Car Robot</h2>
+                <img src="images/Smart_Car_Project.webp" alt="Smart Car" class="w-full h-64 object-cover rounded-lg mb-6">
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-3">Project Overview</h3>
+                    <p class="text-slate-dark mb-4">
+                        This autonomous smart car represents my first major robotics project, combining hardware design, sensor integration, and intelligent programming. The vehicle can navigate obstacles, follow lines, and be controlled wirelessly via Bluetooth.
+                    </p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-3">Technical Implementation</h3>
+                    <ul class="text-slate-dark space-y-2">
+                        <li>• <strong>Microcontroller:</strong> Arduino Uno R3 for main control</li>
+                        <li>• <strong>Motors:</strong> Dual DC motors with L298N motor driver</li>
+                        <li>• <strong>Sensors:</strong> HC-SR04 ultrasonic sensor for obstacle detection</li>
+                        <li>• <strong>Line Detection:</strong> IR sensor array for line following</li>
+                        <li>• <strong>Communication:</strong> HC-05 Bluetooth module for wireless control</li>
+                        <li>• <strong>Power:</strong> 18650 Li-ion battery pack with voltage regulation</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-3">Features</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Autonomous Mode</h4>
+                            <p class="text-sm text-slate-dark">Obstacle avoidance using ultrasonic sensors</p>
+                        </div>
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Line Following</h4>
+                            <p class="text-sm text-slate-dark">Precise line detection and following algorithms</p>
+                        </div>
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Manual Control</h4>
+                            <p class="text-sm text-slate-dark">Bluetooth-based smartphone control</p>
+                        </div>
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Speed Control</h4>
+                            <p class="text-sm text-slate-dark">PWM-based motor speed regulation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="https://github.com/essam778" class="btn-primary px-6 py-2 rounded-lg font-medium">View Code</a>
+                    <a href="#" class="border-2 border-accent-cyan text-accent-cyan px-6 py-2 rounded-lg font-medium hover:bg-accent-cyan hover:text-navy-dark transition-all">Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI ESP32 Modal -->
+    <div class="modal" id="ai-esp32-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('ai-esp32')">&times;</button>
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-accent-cyan mb-6">AI-Powered ESP32 System</h2>
+                <img src="images/AI_ESP32_Project.webp" alt="AI ESP32" class="w-full h-64 object-cover rounded-lg mb-6">
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-3">Project Overview</h3>
+                    <p class="text-slate-dark mb-4">
+                        This cutting-edge project combines the power of ESP32 microcontrollers with Google's Gemini AI, creating an intelligent IoT system capable of real-time data processing, natural language understanding, and autonomous decision-making.
+                    </p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-3">Technical Stack</h3>
+                    <ul class="text-slate-dark space-y-2">
+                        <li>• <strong>Microcontroller:</strong> ESP32-WROOM-32 with WiFi and Bluetooth</li>
+                        <li>• <strong>AI Integration:</strong> Google Gemini API for intelligent processing</li>
+                        <li>• <strong>Sensors:</strong> DHT22 temperature/humidity, MQ-series gas sensors</li>
+                        <li>• <strong>Display:</strong> OLED display for real-time data visualization</li>
+                        <li>• <strong>Cloud:</strong> Firebase for data storage and remote monitoring</li>
+                        <li>• <strong>Communication:</strong> RESTful APIs and WebSocket connections</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-3">AI Capabilities</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Natural Language</h4>
+                            <p class="text-sm text-slate-dark">Voice commands and text-based interactions</p>
+                        </div>
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Pattern Recognition</h4>
+                            <p class="text-sm text-slate-dark">Anomaly detection in sensor data</p>
+                        </div>
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Predictive Analysis</h4>
+                            <p class="text-sm text-slate-dark">Trend forecasting and smart alerts</p>
+                        </div>
+                        <div class="bg-navy-dark p-4 rounded-lg">
+                            <h4 class="font-semibold text-accent-cyan mb-2">Adaptive Learning</h4>
+                            <p class="text-sm text-slate-dark">System improves with usage patterns</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="https://github.com/essam778/ESP32-with-Gemini-AI.git" class="btn-primary px-6 py-2 rounded-lg font-medium">View Code</a>
+                    <a href="#" class="border-2 border-accent-cyan text-accent-cyan px-6 py-2 rounded-lg font-medium hover:bg-accent-cyan hover:text-navy-dark transition-all">Documentation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+         <!-- Project Modal for Website Courses -->
+<div class="modal" id="Courses-website-modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('Courses-website')">&times;</button>
+        <div class="p-8">
+            <h2 class="text-3xl font-bold text-accent-cyan mb-6">Website Courses for High School Students</h2>
+            <img src="images/Moral.png" alt="Website Courses" class="w-full h-64 object-cover rounded-lg mb-6">
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Project Overview</h3>
+                <p class="text-slate-dark mb-4">
+                    This project is a comprehensive platform designed for high school students, offering free online courses in various subjects like mathematics, science, and more. Built with Odoo, it provides easy navigation, course management, and a user-friendly interface for students to track their learning.
+                </p>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Technical Stack</h3>
+                <ul class="text-slate-dark space-y-2">
+                    <li>• <strong>Platform:</strong> Odoo ERP</li>
+                    <li>• <strong>Backend:</strong> Python (Odoo Framework)</li>
+                    <li>• <strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+                    <li>• <strong>Database:</strong> PostgreSQL for storing course data</li>
+                    <li>• <strong>Features:</strong> Online course management, student tracking, interactive learning modules</li>
+                    <li>• <strong>Hosting:</strong> Deployed on a cloud server for easy access</li>
+                </ul>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Key Features</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Interactive Courses</h4>
+                        <p class="text-sm text-slate-dark">Engaging lessons with multimedia content for easier understanding</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Course Tracking</h4>
+                        <p class="text-sm text-slate-dark">Track your learning progress and completed courses</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Free Access</h4>
+                        <p class="text-sm text-slate-dark">All courses are available for free to high school students</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Mobile-friendly</h4>
+                        <p class="text-sm text-slate-dark">Optimized for smartphones and tablets for easy access</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-4">
+               
+                <a href="https://moral2.odoo.com" class="border-2 border-accent-cyan text-accent-cyan px-6 py-2 rounded-lg font-medium hover:bg-accent-cyan hover:text-navy-dark transition-all">Live Demo</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Home Automation System Modal -->
+<div class="modal" id="home-automation-modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('home-automation')">&times;</button>
+        <div class="p-8">
+            <h2 class="text-3xl font-bold text-accent-cyan mb-6">Smart Home System</h2>
+            <img src="images/home.webp" alt="Smart Home System" class="w-full h-64 object-cover rounded-lg mb-6">
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Project Overview</h3>
+                <p class="text-slate-dark mb-4">
+                    This project is a comprehensive home automation system that integrates voice control, scheduling, and energy monitoring functionalities. The system uses an Arduino board with Wi-Fi connectivity to control smart devices around the house, such as lights, fans, and sensors.
+                </p>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Technical Stack</h3>
+                <ul class="text-slate-dark space-y-2">
+                    <li>• <strong>Microcontroller:</strong> Arduino Uno with Wi-Fi module</li>
+                    <li>• <strong>Voice Control:</strong> Google Assistant / Alexa Integration</li>
+                    <li>• <strong>Communication:</strong> MQTT protocol for device communication</li>
+                    <li>• <strong>Sensors:</strong> Temperature, motion, and light sensors</li>
+                    <li>• <strong>Power Supply:</strong> 5V DC adapter for the system</li>
+                    <li>• <strong>Mobile App:</strong> Custom mobile app for controlling devices</li>
+                </ul>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Key Features</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Voice Control</h4>
+                        <p class="text-sm text-slate-dark">Control lights, fans, and other devices using voice commands.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Scheduling</h4>
+                        <p class="text-sm text-slate-dark">Set automatic schedules for appliances to turn on/off at specific times.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Energy Monitoring</h4>
+                        <p class="text-sm text-slate-dark">Monitor energy consumption in real-time to save power.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Mobile App</h4>
+                        <p class="text-sm text-slate-dark">Mobile app integration for remote control of the smart home system.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="https://github.com/essam778" class="btn-primary px-6 py-2 rounded-lg font-medium">View Code</a>
+                <a href="#" class="border-2 border-accent-cyan text-accent-cyan px-6 py-2 rounded-lg font-medium hover:bg-accent-cyan hover:text-navy-dark transition-all">Live Demo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Weather Station Modal -->
+<div class="modal" id="weather-station-modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('weather-station')">&times;</button>
+        <div class="p-8">
+            <h2 class="text-3xl font-bold text-accent-cyan mb-6">Smart Weather Station</h2>
+            <img src="images/IoT_Weather_Station.webp" alt="Smart Weather Station" class="w-full h-64 object-cover rounded-lg mb-6">
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Project Overview</h3>
+                <p class="text-slate-dark mb-4">
+                    This project is an IoT-based weather monitoring system. It collects real-time environmental data such as temperature, humidity, and pressure, stores it in the cloud, and allows users to view this data through a mobile app.
+                </p>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Technical Stack</h3>
+                <ul class="text-slate-dark space-y-2">
+                    <li>• <strong>Microcontroller:</strong> ESP32 with Wi-Fi and Bluetooth</li>
+                    <li>• <strong>Sensors:</strong> DHT22 (Temperature/Humidity), BMP180 (Pressure)</li>
+                    <li>• <strong>Cloud API:</strong> Firebase for real-time data storage</li>
+                    <li>• <strong>Mobile App:</strong> Integration with mobile apps for remote monitoring</li>
+                    <li>• <strong>Communication:</strong> MQTT protocol for data transmission</li>
+                    <li>• <strong>Power Supply:</strong> Powered by a 5V DC adapter</li>
+                </ul>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Key Features</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Real-Time Monitoring</h4>
+                        <p class="text-sm text-slate-dark">Monitor temperature, humidity, and pressure in real-time through a cloud-based dashboard.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Cloud Integration</h4>
+                        <p class="text-sm text-slate-dark">Store and access data securely in the cloud using Firebase.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Mobile App</h4>
+                        <p class="text-sm text-slate-dark">Control and monitor the weather station remotely using a custom mobile app.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Data Alerts</h4>
+                        <p class="text-sm text-slate-dark">Get notifications for significant changes in environmental conditions (e.g., high temperature).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="https://github.com/essam778/Smart-Weather-Station.git" class="btn-primary px-6 py-2 rounded-lg font-medium">View Code</a>
+                <a href="#" class="border-2 border-accent-cyan text-accent-cyan px-6 py-2 rounded-lg font-medium hover:bg-accent-cyan hover:text-navy-dark transition-all">Live Demo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Portfolio Website Modal -->
+<div class="modal" id="portfolio-website-modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('portfolio-website')">&times;</button>
+        <div class="p-8">
+            <h2 class="text-3xl font-bold text-accent-cyan mb-6">Personal Portfolio Website</h2>
+            <img src="images/Website.png" alt="Portfolio Website" class="w-full h-64 object-cover rounded-lg mb-6">
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Project Overview</h3>
+                <p class="text-slate-dark mb-4">
+                    This is my personal portfolio website, designed to showcase my skills and projects as a developer and robotics engineer. The website is fully responsive, built with modern web technologies including HTML, CSS, and JavaScript, using the Tailwind CSS framework for styling.
+                </p>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Technical Stack</h3>
+                <ul class="text-slate-dark space-y-2">
+                    <li>• <strong>Frontend:</strong> HTML, CSS, JavaScript, Tailwind CSS</li>
+                    <li>• <strong>Responsive Design:</strong> Mobile-friendly with Tailwind CSS</li>
+                    <li>• <strong>Deployment:</strong> GitHub Pages for hosting</li>
+                    <li>• <strong>Version Control:</strong> Git & GitHub</li>
+                </ul>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Key Features</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Responsive Design</h4>
+                        <p class="text-sm text-slate-dark">Optimized for desktop, tablet, and mobile viewing experiences.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Project Showcase</h4>
+                        <p class="text-sm text-slate-dark">Displays my personal projects, achievements, and skills.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Modern UI</h4>
+                        <p class="text-sm text-slate-dark">Uses a modern, clean design with an interactive user interface.</p>
+                    </div>
+                    <div class="bg-navy-dark p-4 rounded-lg">
+                        <h4 class="font-semibold text-accent-cyan mb-2">Easy Navigation</h4>
+                        <p class="text-sm text-slate-dark">User-friendly navigation to browse through the different sections of the portfolio.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="https://github.com/essam778/Personal-Website.git" class="btn-primary px-6 py-2 rounded-lg font-medium">View Code</a>
+                <a href="https://essam778.github.io/Personal-Website/" class="border-2 border-accent-cyan text-accent-cyan px-6 py-2 rounded-lg font-medium hover:bg-accent-cyan hover:text-navy-dark transition-all">Live Demo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Add more modals for other projects as needed -->
+
+    <!-- Footer -->
+    <footer class="bg-navy-dark py-8 border-t border-navy-light">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="text-accent-cyan font-mono mb-2">
+                &lt;Essam Hisham/&gt;
+            </div>
+            <p class="text-slate-dark text-sm">
+                © 2025 Essam Hisham. Built with passion and code.
+            </p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
